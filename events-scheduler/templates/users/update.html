@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<form method="post" class="bordered-form">
+    <h2>Update User</h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-success" value="Update">
+        <button class="btn btn-danger">
+             <a class="text-decoration-none text-white" href="{% url 'user_view' %}">
+                 Cancel
+             </a>
+        </button>
+</form>
+{% endblock %}

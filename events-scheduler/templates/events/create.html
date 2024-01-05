@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <form method="post">
+         {% csrf_token %}
+         {{ form.as_p }}
+        <input class="btn btn-primary" type="submit" value="Create event">
+        <button class="btn btn-danger">
+            <a class="text-decoration-none text-white" href="{% url 'user_view' %}">Cancel</a>
+        </button>
+    </form>
+{% endblock %}

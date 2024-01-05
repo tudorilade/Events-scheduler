@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["events_scheduler"]
+
+[project]
+name = "events_scheduler"
+version = "0.0.1"
+authors = [
+    {name = "Tudor Ilade", email = "tudor.ilade@yahoo.com"},
+]
+description = "Dependencies for events scheduler project"
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "Django~=4.2.1",
+    "gunicorn==20.1.0",
+    "psycopg2==2.9.6",
+    "uvicorn==0.22.0",
+    "python-decouple==3.8",
+    "Pillow==9.5.0",
+    "pytz==2023.3",
+    "requests==2.31.0",
+    "coverage==7.2.7",
+    "cryptography==41.0.1",
+    "celery==5.3.1",
+    "django-redis==5.3.0",
+    "django-ratelimit==4.0.0"
+]
+
+[tool.black]
+line-length = 120

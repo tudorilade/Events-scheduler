@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div>
+     <h5>Event detail</h5>
+        <div class="row">
+                <p><strong>Title:</strong></p>
+                <p>{{ event.title }}</p>
+        </div>
+        <div class="row">
+                <p><strong>Description:</strong></p>
+                <p>{{ event.description }}</p>
+        </div>
+        <div class="row">
+                <p><strong>Date of event:</strong></p>
+                <p>{{ event.date }}</p>
+        </div>
+        <div class="row">
+                <p><strong>Number of participants:</strong></p>
+                <p>{{ event.participants_count }}</p>
+        </div>
+        {% if request.user.is_authenticated %}
+        <div class="row">
+            {% if not joined %}
+                <form method="post" action="{% url 'event_join' event.slug %}">{% csrf_token %}
+                    <input type="submit" class="btn btn-success" value="Join to this event">
+                </form>
+            {% else %}
+                <form method="post" action="{% url 'event_withdraw' event.slug %}">{% csrf_token %}
+                    <input type="submit" class="btn btn-danger" value="Withdraw from this event">
+                </form>
+            {% endif %}
+            <p><strong></strong></p>
+        </div>
+        {% else %}
+            <p>To join / withdraw from this event, you have to login first !</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

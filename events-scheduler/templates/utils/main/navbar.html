@@ -1,0 +1,33 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-custom shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'homepage' %}">
+            Home
+        </a>
+        <a class="navbar-brand" href="{% url 'event_list' 'all' %}">See events</a>
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <ul class="navbar-nav ms-auto text-center">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a class="dropdown-toggle" href="#" id="navbarDropdown"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Hi {{ request.user }}!
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end text-end custom-dropdown-menu"
+                        aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item mb-2 custom-link" href="{% url 'event_list' 'creator' %}">See created events</a>
+                            <a class="dropdown-item" href="{% url 'user_view' %}">View profile</a>
+                            <hr class="dropdown-divider">
+                            <a class="dropdown-item" href="{% url 'custom_logout' %}">Logout</a>
+                    </ul>
+                </li>
+                {% else %}
+                    <li class="nav-item d-none d-lg-block w-100">
+                        <a class="w-100 px-4" href="{% url 'custom_login' %}"> Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

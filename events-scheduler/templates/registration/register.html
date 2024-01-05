@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+    <form class="bordered-form" method="post">
+      <h2 class="text-capitalize">
+        Create a new account
+      </h2>
+      {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary w-100">
+          Register
+        </button>
+        <a href="{% url 'homepage' %}" class="btn btn-danger w-100">
+          Cancel
+        </a>
+      <p>
+        Already have an account?
+        <a href="{% url 'custom_login' %}" class="fw-bold text-body">
+          <u>Login here</u>
+        </a>
+      </p>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function () {
+    $('#id_email, #id_password, #id_confirm_password').addClass('form-control');
+  });
+</script>
+{% endblock %}

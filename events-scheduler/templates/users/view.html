@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">User Profile</h5>
+        <div class="row">
+                <p><strong>Email:</strong></p>
+                <p>{{ user.email }}</p>
+        </div>
+        <hr>
+        <div class="row">
+                <p><strong>Registration date:</strong></p>
+                <p>{{ user.registration_date }}</p>
+        </div>
+        <hr>
+        <div class="row">
+            <p class="mb-0"><strong>Email verified:</strong></p>
+            <p class="mb-0">
+                {% if user.is_verified %}
+                    <p>Yes</p>
+                {% else %}
+                    <p>No</p>
+                    <a class="url" href="{% url 'send_confirmation_email' %}">Verify your email in order to create events</a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+
+    <p>
+        <a href="{% url 'user_update' %}">Update your profile</a>
+    </p>
+    <p>
+        <a href="{% url 'event_create' %}">Create a new event</a>
+    </p>
+{% endblock %}

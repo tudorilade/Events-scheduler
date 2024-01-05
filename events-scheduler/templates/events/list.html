@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% if not page_obj %}
+        <p>No events listed yet!</p>
+    {% else %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Date</th>
+                <th scope="col">Participants registered</th>
+                <th scope="col">Creator</th>
+                {% if not show_edit_and_delete %}
+                    <th scope="col">Details</th>
+                {% endif %}
+                {% if request.user.is_authenticated and show_edit_and_delete %}
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                {% endif %}
+            </tr>
+            </thead>
+        <tbody>
+        {% for event in page_obj %}
+            <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.date }}</td>
+                <td>{{ event.participants_count }}</td>
+                <td>{{ event.creator }}</td>
+                {% if not show_edit_and_delete %}
+                    <td><a href="{% url 'event_detail' event.slug %}">See event details</a></td>
+                {% endif %}
+            {% if request.user.is_authenticated and show_edit_and_delete %}
+                <td> <a href="{% url 'event_update' event.slug %}">Update</a></td>
+                <td> <a href="{% url 'event_delete' event.slug %}">Delete</a></td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+    {% endif %}
+
+{% endblock %}

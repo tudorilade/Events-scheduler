@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+    <form class="bordered-form" method="post">
+        <h2>
+            Login
+        </h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <a href="{% url 'send_password_reset' %}">Forgot password?</a>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" value="Sign in">
+        </div>
+        <div>
+            <p>
+                Don't you have an account? Sign up with just one <a href="{% url 'register' %}">click!</a>
+            </p>
+        </div>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function(){
+            $('#id_username, #id_password').addClass('form-control');
+        });
+    </script>
+{% endblock %}

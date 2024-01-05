@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: events
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    entrypoint: ["bin/entrypoint.sh"]
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  redis:
+    restart: unless-stopped
+    image: redis:7.0.5-alpine
+    expose:
+        - 6379
+  worker:
+      restart: unless-stopped
+      build:
+          context: .
+      entrypoint: bin/start_celery.sh
+      depends_on:
+          - db
+          - redis
+
+  beat:
+    restart: unless-stopped
+    build:
+      context: .
+    entrypoint: bin/start_beat.sh
+    depends_on:
+      - db
+      - redis

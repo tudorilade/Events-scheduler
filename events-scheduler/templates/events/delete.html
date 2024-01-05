@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete the event?</p>
+        <input type="submit" class="btn btn-danger" value="Delete">
+        <button class="btn btn-success">
+            <a class="text-white text-decoration-none" href="{% url 'event_list' 'creator' %}">Cancel</a>
+        </button>
+    </form>
+
+{% endblock %}

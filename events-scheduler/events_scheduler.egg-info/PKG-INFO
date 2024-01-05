@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: events-scheduler
+Version: 0.0.1
+Summary: Dependencies for events scheduler project
+Author-email: Tudor Ilade <tudor.ilade@yahoo.com>
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown

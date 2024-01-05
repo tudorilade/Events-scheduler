@@ -1,0 +1,16 @@
+[run]
+source = .
+omit =
+    */migrations/*
+    */settings/*
+    */wsgi.py
+    */asgi.py
+    */admin.py
+    */*initial.py
+    */__init__.py
+    */apps.py
+    */tests*
+    *manage.py
+[html]
+title = Events coverage
+directory = events_coverage
